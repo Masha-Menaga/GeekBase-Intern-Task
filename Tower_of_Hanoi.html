@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower of Hanoi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .tower {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            width: 600px;
+            height: 200px;
+        }
+
+        .peg {
+            width: 20px;
+            height: 150px;
+            background-color: #555;
+            position: relative;
+        }
+
+        .peg::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            bottom: -10px;
+            width: 40px;
+            height: 10px;
+            background-color: #555;
+        }
+
+        .disk {
+            width: 60px;
+            height: 30px;
+            background-color: #ff6347;
+            position: absolute;
+			border-radius:50px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+			margin-bottom : 60px;
+        }
+
+        .disk2 {
+            width: 80px;
+			margin-bottom : 30px;
+            background-color: #ffa500;
+        }
+
+        .disk3 {
+            width: 100px;
+			margin-bottom : 0px;
+            background-color: #4682b4;
+        }
+		button {
+            padding: 10px 20px;
+			margin:80px;
+            background-color: #4CAF50;
+            color: white;
+			font-weight:bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+           
+        }
+    </style>
+</head>
+<body>
+    <h1>Tower of Hanoi</h1>
+		<div class="tower">
+        <div class="peg" id="pegA" onclick="makeMove()"></div>
+        <div class="peg" id="pegB" onclick="makeMove()"></div>
+        <div class="peg" id="pegC" onclick="makeMove()"></div>
+    </div>
+    <button onclick="startGame()">Start Game</button>
+	
+    <script>
+        let moves = [];
+        let currentMove = 0;
+
+        function startGame() {
+            
+            document.getElementById('pegA').innerHTML = '';
+            document.getElementById('pegB').innerHTML = '';
+            document.getElementById('pegC').innerHTML = '';
+            moves = [];
+            currentMove = 0;
+
+            
+            createDisk(3, 'pegA');
+            createDisk(2, 'pegA');
+            createDisk(1, 'pegA');
+		
+
+            
+            solveHanoi(3, 'pegA', 'pegC', 'pegB');
+            displayNextMove();
+        }
+
+        function createDisk(size, pegId) {
+            const disk = document.createElement('div');
+            disk.className = 'disk';
+            if (size === 2) disk.className += ' disk2';
+            if (size === 3) disk.className += ' disk3';
+            document.getElementById(pegId).appendChild(disk);
+        }
+
+        function solveHanoi(n, from, to, aux) {
+            if (n === 1) {
+                moves.push([from, to]);
+                return;
+            }
+            solveHanoi(n - 1, from, aux, to);
+            moves.push([from, to]);
+            solveHanoi(n - 1, aux, to, from);
+        }
+
+        function displayNextMove() {
+            if (currentMove >= moves.length) return;
+
+            const [from, to] = moves[currentMove];
+            const fromPeg = document.getElementById(from);
+            const toPeg = document.getElementById(to);
+
+            if (fromPeg.children.length > 0) {
+                const disk = fromPeg.lastElementChild;
+                toPeg.appendChild(disk);
+            }
+
+            currentMove++;
+            
+			
+        }
+		function makeMove() {
+			if (currentMove >= moves.length) {
+				alert("All moves completed!");
+				return;
+			}
+
+			const [from, to] = moves[currentMove];
+			const fromPeg = document.getElementById(from);
+			const toPeg = document.getElementById(to);
+
+			if (fromPeg.children.length > 0) {
+				const disk = fromPeg.lastElementChild;
+				toPeg.appendChild(disk);
+			}
+
+			currentMove++;
+		}
+	</script>
+</body>
+</html>
