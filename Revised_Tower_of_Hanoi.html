@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower of Hanoi</title>
+    <style>
+        body {
+            font-family: 'Minecraftia', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #a084eb;
+        }
+
+        h1 {
+            margin-bottom: 50px;
+			color: #5f208a;
+        }
+
+        .tower {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            width: 400px;
+            height: 200px;
+        }
+
+        .peg {
+            width: 20px;
+            height: 150px;
+            background-color: #444;
+            position: relative;
+			margin: 0px 20px;
+			border-radius:10px 10px 0px 0px;
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+
+        }
+		
+        .peg::after {
+            content: '';
+            position: absolute;
+            left: -80px;
+            bottom: -18px;
+            width: 180px;
+            height: 20px;
+			border-radius:5px 5px 0px 0px;
+            background-color: #fff;
+			box-shadow: 20px;
+			mix-blend-mode: color-dodge;
+			
+        }
+
+        .disk {
+            width: 60px;
+            height: 30px;
+            background-color: #f7755e;
+            position: absolute;
+			border-radius:50px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+			margin-bottom : 60px;
+        }
+
+        .disk.disk2 {
+            width: 80px;
+			margin-bottom : 30px;
+            background-color: #f7b740;
+        }
+
+        .disk.disk3 {
+            width: 100px;
+			margin-bottom : 0px;
+            background-color: #67eba7;
+        }
+		button {
+			font-family: 'Minecraftia', cursive;
+            padding: 10px 20px;
+			margin-top:60px;
+            background-color: #663787;
+            color: white;
+			font-weight:bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+           
+        }
+		.text{         
+            position: relative;
+			margin: 10px 20px;
+			left: 15px;
+			display: flex;
+            justify-content: space-between;
+            width: 430px;
+            height: 25px;
+			font-size: 18px;
+			margin:20px 20px 0px 20px;
+			text-shadow: -1px 3px 2px rgba(255, 255, 255, 0.5);
+			color: #6228a8;
+			
+			font-weight: bold;
+            
+		}
+    </style>
+</head>
+<body>
+    <h1>Tower of Hanoi</h1>
+    <div class="tower">
+        <div class="peg" id="pegA"></div>
+        <div class="peg" id="pegB"></div>
+        <div class="peg" id="pegC"></div>
+    </div>
+	
+	<div class="text">
+		<div>Origin</div>
+		<div>Destination</div>
+	</div>
+    
+	<button onclick="startGame()">Start Game</button>
+	
+    <script>
+        
+
+        function startGame() {
+            
+            const pegs = document.querySelectorAll('.peg');
+            pegs.forEach(peg => peg.innerHTML = '');
+
+            
+            createDisk(3, 'pegA');
+            createDisk(2, 'pegA');
+            createDisk(1, 'pegA');
+		
+
+            
+            addDragAndDropListeners();
+        }
+
+        function createDisk(size, pegId) {
+            const disk = document.createElement('div');
+            disk.className = 'disk';
+            disk.draggable = true;
+			disk.dataset.size = size;
+            disk.id = `disk${size}`;
+			
+			if (size === 2) disk.className += ' disk2';
+            if (size === 3) disk.className += ' disk3';
+            document.getElementById(pegId).appendChild(disk);
+        }
+		
+		function addDragAndDropListeners() {
+			const disks = document.querySelectorAll('.disk');
+			const pegs = document.querySelectorAll('.peg');
+
+			disks.forEach(disk => {
+				disk.addEventListener('dragstart', dragStart);
+				disk.addEventListener('dragend', dragEnd);
+			});
+
+			pegs.forEach(peg => {
+				peg.addEventListener('dragover', dragOver);
+				peg.addEventListener('drop', dropDisk);
+			});
+		}
+
+		function dragStart(event) {
+			event.target.style.opacity = '0.5';
+			const disk = event.target;
+			const peg = disk.parentElement;
+			const isTopDisk = disk === peg.lastElementChild;
+
+			if (isTopDisk) {
+				event.dataTransfer.setData('text', disk.id);
+			} else {
+				event.preventDefault(); 
+			}
+		}
+
+		function dragEnd(event) {
+			event.target.style.opacity = '';
+		}
+
+		function dragOver(event) {
+			event.preventDefault();  
+		}
+
+		function dropDisk(event) {
+			event.preventDefault();
+			const diskId = event.dataTransfer.getData('text');
+			const disk = document.getElementById(diskId);
+			const targetPeg = event.currentTarget;
+
+			if (isValidMove(disk, targetPeg)) {
+				targetPeg.appendChild(disk);
+				checkWinCondition(); 
+			} 
+			else {
+				alert("Invalid move: Can't place a larger disk on a smaller one.");
+			}
+		}
+
+		function isValidMove(disk, targetPeg) {
+			const topDisk = targetPeg.lastElementChild;
+
+			if (!topDisk) {
+				return true;  
+			}
+
+			return parseInt(disk.dataset.size) < parseInt(topDisk.dataset.size);
+		}
+		 function checkWinCondition() {
+            const pegC = document.getElementById('pegC');
+            if (pegC.children.length === 3) {
+                alert("Congratulations! You've solved the Tower of Hanoi!");
+            }
+        }
+	</script>
+</body>
+</html>
