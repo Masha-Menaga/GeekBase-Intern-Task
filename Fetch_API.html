@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Three Products from Fake Store API</title>
+    <style>
+         .product-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+		
+        }
+		.product {
+            border: 1px solid #ddd;
+			border-radius: 20px;
+            padding: 10px;
+            margin: 10px;
+            max-width: 400px;
+			flex: 1;
+            box-sizing: border-box;
+			background-color: #fff;
+			
+        }
+        .product img {
+           width: 250px;
+            height: 200px;
+        }
+		body{
+			text-align: center;
+			height: 100vh;
+			background-color: #ddd;
+		}
+		h2{
+			margin-bottom:50px;
+		}
+    </style>
+</head>
+<body>
+    <h1>Fetch Multiple Products from Fake Store API</h1>
+    <div id="product-container" class="product-container"></div>
+
+    <script>
+        // Hardcoded product IDs
+        const productIds = [7, 8, 6]; 
+
+        const fetchProduct = (productId) => {
+            return fetch(`https://fakestoreapi.com/products/${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Product not found');
+                    }
+                    return response.json();
+                });
+        };
+
+        const displayProducts = (products) => {
+            let output = '';
+            products.forEach(product => {
+                output += `
+                    <div class="product">
+                        <h2>${product.title}</h2>
+                        <img src="${product.image}" alt="${product.title}">
+                        <p><strong>Price:</strong> $${product.price}</p>
+                        <p>${product.description}</p>
+						
+                    </div>
+					
+                `;
+            });
+            document.getElementById('product-container').innerHTML = output;
+        };
+
+        Promise.all(productIds.map(fetchProduct))
+            .then(displayProducts)
+            .catch(error => {
+                document.getElementById('product-container').innerHTML = `<p>${error.message}</p>`;
+            });
+    </script>
+</body>
+</html>
