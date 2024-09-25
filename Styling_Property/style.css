@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:sans-serif;
+}
+.h1{
+    color:#0062ff;
+    text-align: center;
+}
+.container{
+    /* Div Properties */
+    width: 600px;
+    height: 300px;
+    margin: 10px;
+    text-align: center;
+    background-color: darkorchid;
+    /* background-color: url('');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; */
+    
+    /* Box Model Properties */
+    /* border: black;
+    border-style: dotted;
+    border-width: 3px; */
+    border: 5px double salmon;
+
+    /* display: flex;
+    justify-content: center;
+    align-items: center;  */
+    
+}
+#heading{
+    margin: 5px;
+    /* text-decoration: line-through rgb(180, 226, 43) 2px; */
+    color: rgb(9, 13, 233) ;
+    text-transform: capitalize;
+   letter-spacing: 1dvh;
+   /* line-height: 20px; */
+   text-shadow: 2px 2px #3f444d;
+   font-size: 32px;
+   font-variant: small-caps;
+   text-decoration-line: line-through;
+   text-decoration-color: aqua;
+   text-decoration-style: dashed;
+   /* font-stretch: wider; */
+   font-variant-emoji: ❤️;
+img{
+    
+    padding: 10px;
+}
+.emoji-auto {
+    font-variant-emoji: auto;
+  }
+  
+  .emoji-text {
+    font-variant-emoji: text;
+  }
+  
+  .emoji-emoji {
+    font-variant-emoji: emoji;
+  }
+  
