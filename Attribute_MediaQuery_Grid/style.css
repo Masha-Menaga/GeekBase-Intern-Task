@@ -1,0 +1,78 @@
+/* Universal Selector */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Attribute Selector */
+
+input[type="text"] {
+  color: rgb(255, 106, 0);
+  border: 2px solid #555;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+/* Media Query */
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: blue;
+  margin: 10px;
+  padding: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+  /* width: 400px;
+  height: 400px; */
+}
+.box {
+  background-color: aqua;
+  width: 100px;
+  height: 100px;
+}
+@media screen and (max-width: 465px) {
+  h2 {
+    color: pink;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 466px) {
+  h2 {
+    color: crimson;
+  }
+  p {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  h2 {
+    color: aqua;
+  }
+  p {
+    font-size: 16px;
+  }
+}
+
+/* GRID */
+.container1 {
+  display: grid;
+  grid-template-columns: 110px 110px 110px 110px;
+  grid-template-rows: 120px 120px;
+  align-content: center;
+  justify-content: center;
+  background-color: coral;
+  gap: 10px;
+  margin: 10 auto;
+  height: 400px;
+}
+.box1 {
+  background-color: aqua;
+  width: 100px;
+  height: 100px;
+}
