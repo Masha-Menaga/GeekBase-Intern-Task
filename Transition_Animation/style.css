@@ -1,0 +1,85 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Transition */
+
+.container {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  border-radius: 10px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  margin: auto;
+}
+
+/* Pseudo Selector */
+
+.container:hover {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(204, 255, 0);
+  transition: 2s ease-in-out height;
+  transition-delay: 1s;
+  color: #000;
+  border: 2px solid;
+  font-size: 18px;
+}
+.container h2 {
+  margin: auto;
+}
+
+/* Animation */
+
+.container1 {
+  width: 100px;
+  height: 100px;
+  background-color: blueviolet;
+  /* animation-name: demo;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; */
+  animation: demo 4s ease infinite;
+  border-radius: 10px;
+  font-size: 14px;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+@keyframes demo {
+  /* from{
+        background-color: aqua;
+    }
+    to{
+        background-color: brown;
+    } */
+
+  0% {
+    background-color: aquamarine;
+    margin-left: 100px;
+  }
+  25% {
+    background-color: dimgray;
+    margin-left: 200px;
+  }
+  50% {
+    background-color: darkmagenta;
+    margin-left: 300px;
+  }
+  75% {
+    background-color: dimgray;
+    margin-left: 200px;
+  }
+  100% {
+    background-color: aquamarine;
+    margin-left: 100px;
+  }
+}
