@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditional Statments</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>Conditional Statements</h1>
+    <h2>Syntax</h2>
+    <table>
+      <thead></thead>
+      <tbody>
+        <tr>
+          <th>Simple If Statement</th>
+          <th>If Else Statement</th>
+          <th>Else If Statement</th>
+          <th>Switch Case</th>
+        </tr>
+        <tr>
+          <td rowspan="2">
+            <pre>
+if(condition)
+{
+    Statemnts;
+}
+Statement after if-block;
+            </pre>
+          </td>
+          <td>
+            <pre>
+if(condition)
+{
+    true-block Statemnts;
+}
+else{
+    false-block Statements;
+}
+            </pre>
+          </td>
+          <td rowspan="2">
+            <pre>
+if(condition1)
+{
+    True-block of condition1;
+}
+elseif(codition2)
+{
+    False-block of Condition1;
+                &
+    True-block of condition2;
+}
+else
+{
+    False-block of Condition1 & Condition 2; 
+}
+            </pre>
+          </td>
+          <td rowspan="2">
+            <pre>
+switch(key)
+{
+    case value1:
+        Block1;
+        break;
+    case value2:
+        Block2;
+        break;
+    case value3:
+        Block3;
+        break;
+    .
+    .
+    case valuen:
+        Blockn;
+        break;
+    default:
+        default Block;
+        Break;
+}
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td class="center">
+            <span>Ternary Operator</span> <br /><br />
+            <pre>Condition ? true_block : false_block;</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <script src="script.js"></script>
+  </body>
+</html>
